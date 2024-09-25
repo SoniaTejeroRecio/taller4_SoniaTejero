@@ -92,9 +92,78 @@ fun WelcomeScreen(navController: NavHostController) {
     }
 }
 
-@Composable
+/*@Composable
 fun SecondScreen() {
     Text(text = "Esta es la segunda pantalla")
+}
+
+ */
+@Composable
+fun SecondScreen() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Button(
+            onClick = { },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        ) {
+            Text(text = "Agregar Novelas")
+        }
+        Button(
+            onClick = {  },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        ) {
+            Text(text = "Eliminar Novelas")
+        }
+        Button(
+            onClick = {  },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        ) {
+            Text(text = "Ver Detalles de las Novelas")
+        }
+        Button(
+            onClick = {  },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        ) {
+            Text(text = "Marcar Novelas Favoritas")
+        }
+        Button(
+            onClick = { },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        ) {
+            Text(text = "Añadir Reseñas")
+        }
+        Button(
+            onClick = { },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        ) {
+            Text(text = "Agregar Reseñas")
+        }
+        Button(
+            onClick = { },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        ) {
+            Text(text = "Otras opciones")
+        }
+    }
 }
 
 @Preview(showBackground = true)
@@ -103,4 +172,5 @@ fun WelcomeScreenPreview() {
     GestionNovelasTheme {
         WelcomeScreen(rememberNavController())
     }
+
 }

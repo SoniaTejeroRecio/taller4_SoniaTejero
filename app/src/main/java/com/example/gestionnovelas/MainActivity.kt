@@ -9,6 +9,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -36,7 +40,8 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(navController = navController, startDestination = "welcome") {
                     composable("welcome") { WelcomeScreen(navController) }
-                    composable("second") { SecondScreen() }
+                    composable("second") { SecondScreen(navController) }
+                    composable("addNovela") { AddNovelaScreen(navController) }
                 }
             }
         }
@@ -99,7 +104,7 @@ fun SecondScreen() {
 
  */
 @Composable
-fun SecondScreen() {
+fun SecondScreen(navController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -108,7 +113,7 @@ fun SecondScreen() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Button(
-            onClick = { },
+            onClick = { navController.navigate("addNovela") },  // Navegar a la pantalla de agregar novelas
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp)
@@ -166,11 +171,88 @@ fun SecondScreen() {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun WelcomeScreenPreview() {
-    GestionNovelasTheme {
-        WelcomeScreen(rememberNavController())
+
+
+    @Composable
+    fun AddNovelaScreen(navController: NavHostController) {
+        var titulo by remember { mutableStateOf("") }
+        var anioPublicacion by remember { mutableStateOf("") }
+        var notaMedia by remember { mutableStateOf("") }
+        var editorial by remember { mutableStateOf("") }
+        var temas by remember { mutableStateOf("") }
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(text = "Introduce los datos de la novela", fontWeight = FontWeight.Bold, fontSize = 20.sp)
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Campo para el título de la novela
+            OutlinedTextField(
+                value = titulo,
+                onValueChange = { titulo = it },
+                label = { Text("Título") },
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            // Campo para el año de publicación
+            OutlinedTextField(
+                value = anioPublicacion,
+                onValueChange = { anioPublicacion = it },
+                label = { Text("Año de Publicación") },
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            // Campo para la nota media
+            OutlinedTextField(
+                value = notaMedia,
+                onValueChange = { notaMedia = it },
+                label = { Text("Nota Media") },
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            // Campo para la editorial
+            OutlinedTextField(
+                value = editorial,
+                onValueChange = { editorial = it },
+                label = { Text("Editorial") },
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            // Campo para los temas
+            OutlinedTextField(
+                value = temas,
+                onValueChange = { temas = it },
+                label = { Text("Temas") },
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Botón para guardar la novela
+            Button(
+                onClick = {
+                    // Aquí puedes manejar el guardado de los datos
+                    // Volver a la pantalla anterior tras guardar la novela
+                    navController.popBackStack()
+                },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(text = "Guardar Novela")
+            }
+        }
     }
 
-}

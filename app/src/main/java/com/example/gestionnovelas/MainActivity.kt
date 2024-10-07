@@ -32,7 +32,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
-
+import androidx.compose.material.icons.filled.Home
 
 data class Novela(
     val titulo: String,
@@ -58,7 +58,7 @@ class MainActivity : ComponentActivity() {
                     composable("addNovela") { AddNovelaScreen(navController, novelas) }
                     composable("detallesNovelas") { DetallesNovelasScreen(navController, novelas) }
 
-                    // Navegación a la pantalla de reseñas
+
                     composable("reseñas/{tituloNovela}") { backStackEntry ->
                         val tituloNovela = backStackEntry.arguments?.getString("tituloNovela")
                         val novela = novelas.find { it.titulo == tituloNovela }
@@ -131,7 +131,7 @@ fun SecondScreen(navController: NavHostController) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Button(
-            onClick = { navController.navigate("addNovela") },  //Navegar a la pantalla de agregar novelas
+            onClick = { navController.navigate("addNovela") },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp)
@@ -146,6 +146,8 @@ fun SecondScreen(navController: NavHostController) {
         ) {
             Text(text = "Ver Detalles de las Novelas")
         }
+        Spacer(modifier = Modifier.height(16.dp))
+        NavigationButtons(navController)
     }
 }
 
@@ -219,6 +221,9 @@ fun AddNovelaScreen(navController: NavHostController, novelas: MutableList<Novel
         ) {
             Text(text = "Guardar Novela")
         }
+
+        Spacer(modifier = Modifier.height(16.dp))
+        NavigationButtons(navController)
     }
 }
 
@@ -240,6 +245,9 @@ fun DetallesNovelasScreen(navController: NavHostController, novelas: MutableList
             )
         }
     }
+
+    Spacer(modifier = Modifier.height(16.dp))
+    NavigationButtons(navController)
 }
 
 @Composable
@@ -264,7 +272,7 @@ fun ResenasScreen(navController: NavHostController, novela: Novela) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        //Campo para añadir una nueva reseña
+        //Aniadir nuevas resenas
         OutlinedTextField(
             value = nuevaReseña,
             onValueChange = { nuevaReseña = it },
@@ -274,7 +282,7 @@ fun ResenasScreen(navController: NavHostController, novela: Novela) {
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        //Botón para añadir la reseña
+        //Boton aañaadir reseña
         Button(
             onClick = {
                 if (nuevaReseña.isNotEmpty()) {
@@ -286,6 +294,9 @@ fun ResenasScreen(navController: NavHostController, novela: Novela) {
         ) {
             Text("Añadir Reseña")
         }
+
+        Spacer(modifier = Modifier.height(16.dp))
+        NavigationButtons(navController)
     }
 }
 
@@ -328,6 +339,27 @@ fun NovelaItem(novela: Novela, navController: NavHostController, onEliminar: () 
                 painter = painterResource(id = R.drawable.icono_resena),
                 contentDescription = "Reseñas"
             )
+        }
+    }
+}
+
+
+@Composable
+fun NavigationButtons(navController: NavHostController) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ) {
+        //Botón para volver atrás
+        Button(onClick = { navController.popBackStack() }) {
+            Text("Volver")
+        }
+
+        //Botón para ir a la pantalla principal (Home)
+        Button(onClick = { navController.navigate("welcome") }) {
+            Icon(imageVector = Icons.Filled.Home, contentDescription = "Home")
+            Spacer(modifier = Modifier.width(8.dp))
+            Text("Home")
         }
     }
 }

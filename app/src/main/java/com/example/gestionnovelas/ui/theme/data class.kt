@@ -6,5 +6,5 @@ data class Novela(
     val notaMedia: String,
     val editorial: String,
     val temas: String,
-    var esFavorita: Boolean = false // Para marcar si es favorita o no
+    var esFavorita: Boolean = false //Para marcar si es favorita o no
 )

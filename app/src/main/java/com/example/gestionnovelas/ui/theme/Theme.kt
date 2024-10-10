@@ -39,7 +39,7 @@ fun GestionNovelasTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = AppTypography,  // Cambiado para evitar conflictos
+        typography = AppTypography,
         content = content
     )
 }

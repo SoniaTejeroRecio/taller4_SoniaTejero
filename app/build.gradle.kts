@@ -1,5 +1,5 @@
 plugins {
-    id("com.google.gms.google-services")
+    id("com.google.gms.google-services") // Plugin para integrar Google Services
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
 }
@@ -51,27 +51,40 @@ android {
 }
 
 dependencies {
+    //Firebase BoM and Firestore implementation
     implementation(platform("com.google.firebase:firebase-bom:33.4.0"))
-    implementation("com.google.firebase:firebase-firestore-ktx") // Firestore
-    implementation(platform("com.google.firebase:firebase-bom:33.4.0"))
-    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-firestore-ktx")  // Firestore
 
+    //Firebase Cloud Messaging (FCM)
+    implementation("com.google.firebase:firebase-messaging-ktx") // Firebase Messaging
+
+    //Firebase Analytics (opcional, puede ser removido si no lo necesitas)
+    implementation("com.google.firebase:firebase-analytics-ktx") // Firebase Analytics
+
+    //AndroidX dependencies
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
+
+    //Jetpack Compose dependencies
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+
+    //Navigation for Jetpack Compose
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.navigation.runtime.ktx)
-    implementation(libs.firebase.messaging.ktx)
+
+    //Testing dependencies
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+
+    //Debugging dependencies
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }

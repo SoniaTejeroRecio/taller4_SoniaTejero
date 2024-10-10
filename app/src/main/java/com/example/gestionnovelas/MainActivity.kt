@@ -63,6 +63,7 @@ data class Novela(
 }
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
+
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
 
@@ -70,6 +71,11 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         remoteMessage.data?.let {
             sendNotification(it["title"], it["body"])
         }
+    }
+
+    override fun onNewToken(token: String) {
+        super.onNewToken(token)
+        // Aquí puedes enviar el token al servidor o guardarlo en las preferencias para usarlo más tarde.
     }
 
     private fun sendNotification(title: String?, body: String?) {
@@ -83,21 +89,20 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             notificationManager?.createNotificationChannel(channel)
         }
 
-        // Verificar si el permiso de notificaciones está concedido
+        // Verificar si el permiso de notificaciones está concedido (para Android 13+)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(
                     this,
                     android.Manifest.permission.POST_NOTIFICATIONS
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
-                // Si el permiso no está concedido, no enviar la notificación
-                return
+                return // Si el permiso no está concedido, no enviar la notificación
             }
         }
 
         // Crear la notificación
         val builder = NotificationCompat.Builder(this, "default_channel")
-            .setSmallIcon(R.drawable.ic_notification) // Asegúrate de que `ic_notification` existe en `res/drawable`
+            .setSmallIcon(R.drawable.ic_notification) // Asegúrate de tener este icono en drawable
             .setContentTitle(title)
             .setContentText(body)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
@@ -108,6 +113,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         }
     }
 }
+
 
 
 

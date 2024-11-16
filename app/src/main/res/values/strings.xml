@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">gestionNovelas</string>
+    <string name="app_name">Gestión Novelas</string>
+    <string name="novela_appwidget_description">Widget for displaying novels</string>
 </resources>

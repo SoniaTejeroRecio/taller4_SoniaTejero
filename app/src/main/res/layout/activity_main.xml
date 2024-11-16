@@ -1,0 +1,78 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Fondo con imagen -->
+    <ImageView
+        android:id="@+id/backgroundImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/fondo_libros"
+        android:scaleType="centerCrop"
+        android:alpha="0.6"
+        android:contentDescription="@string/background_image_desc" />
+
+    <!-- Contenido principal -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center"
+        android:background="@android:color/transparent">
+
+        <!-- Texto de saludo -->
+        <TextView
+            android:id="@+id/greetingTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/greeting_text"
+            android:textSize="24sp"
+            android:textColor="#FFFFFF"
+            android:padding="16dp"
+            android:shadowColor="#000000"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="4" />
+
+        <!-- Botón para ir a la pantalla principal -->
+        <Button
+            android:id="@+id/buttonMainScreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_main_screen"
+            android:layout_marginTop="16dp"
+            android:background="#005BBB"
+            android:textColor="#FFFFFF" />
+
+        <!-- Botón para el sensor -->
+        <Button
+            android:id="@+id/buttonSensor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_sensor"
+            android:layout_marginTop="16dp"
+            android:background="#007F3D"
+            android:textColor="#FFFFFF" />
+
+        <!-- Botón para configuración de Widget -->
+        <Button
+            android:id="@+id/buttonWidgetConfig"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_widget_config"
+            android:layout_marginTop="16dp"
+            android:background="#E37500"
+            android:textColor="#000000" />
+
+        <!-- Botón para añadir novela -->
+        <Button
+            android:id="@+id/addNovelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_add_novel"
+            android:layout_marginTop="16dp"
+            android:background="#B7001E"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+</RelativeLayout>

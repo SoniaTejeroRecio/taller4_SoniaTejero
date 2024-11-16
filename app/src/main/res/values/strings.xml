@@ -1,3 +1,29 @@
 <resources>
-    <string name="app_name">gestionNovelas</string>
+    <!-- Nombre de la app -->
+    <string name="app_name">Gestión de Novelas</string>
+
+    <!-- Descripción del widget -->
+    <string name="novela_appwidget_description">Widget para mostrar información de novelas</string>
+
+    <!-- Cadenas específicas para el diseño -->
+    <string name="novela_title">Título de la Novela</string>
+    <string name="novela_editorial">Editorial</string>
+    <string name="novela_details">Detalles de la Novela</string>
+    <string name="my_checkbox_text">Selecciona esta opción</string>
+    <string name="radio_button_1">Primera opción</string>
+    <string name="radio_button_2">Segunda opción</string>
+    <string name="update_button">Actualizar información</string>
+
+    <!-- Mensajes adicionales (si es necesario) -->
+    <string name="loading">Cargando...</string>
+    <string name="error_message">Ha ocurrido un error. Inténtalo de nuevo.</string>
+    <string name="success_message">Operación realizada con éxito.</string>
+
+    <!-- Nuevas cadenas para activity_main.xml -->
+    <string name="background_image_desc">Background Image</string>
+    <string name="greeting_text">¡Bienvenido!</string>
+    <string name="button_main_screen">Pantalla Principal</string>
+    <string name="button_sensor">Sensor</string>
+    <string name="button_widget_config">Configurar Widget</string>
+    <string name="button_add_novel">Agregar Novela</string>
 </resources>

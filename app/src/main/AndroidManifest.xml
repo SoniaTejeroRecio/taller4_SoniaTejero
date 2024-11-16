@@ -1,42 +1,55 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <!-- Permisos necesarios para FCM y notificaciones -->
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    package="com.example.gestionnovelas">
 
     <application
         android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.GestionNovelas"
-        tools:targetApi="31">
-
-        <!-- Actividad principal de la aplicación -->
+        android:theme="@style/Theme.GestionNovelas">
         <activity
             android:name=".MainActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.GestionNovelas">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!-- Servicio de Firebase Messaging -->
-        <service
-            android:name=".MyFirebaseMessagingService"
+        <activity
+            android:name=".MainScreenActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NovelaAppWidgetConfigurationActivity"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
-        </service>
+        </activity>
+        <activity
+            android:name=".SensorActivity"
+            android:exported="true" />
+        <activity
+            android:name=".NovelaAppWidgetPreviewActivity"
+            android:exported="true" />
+        <activity
+            android:name=".NovelaLoadingAppWidgetActivity"
+            android:exported="true"
+            android:label="Novela Loading Widget Activity" />
 
+        <receiver
+            android:name=".NovelaAppWidgetProvider"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/novela_widget_info" />
+        </receiver>
+
+        <service
+            android:name=".NovelaWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
     </application>
-
 </manifest>

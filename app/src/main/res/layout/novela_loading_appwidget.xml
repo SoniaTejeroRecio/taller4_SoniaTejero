@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@android:color/white">
+
+    <TextView
+        android:id="@+id/novela_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Novela Title"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/novela_editorial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Novela Editorial"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/novela_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Novela Details"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/add_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Novela" />
+</LinearLayout>

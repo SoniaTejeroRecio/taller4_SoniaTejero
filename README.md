@@ -1,79 +1,72 @@
-# Proyecto gestionNovelas_SoniaTejeroRecio
+# Novelas con widgets y fragments - Sonia Tejero Recio
 
 ## Comenzamos 🚀
 
-Este proyecto está desarrollado completamente en Kotlin. La aplicación se centra en la gestión de novelas utilizando Firebase Firestore para la sincronización de datos en tiempo real y Firebase Cloud Messaging (FCM) para el envío de notificaciones push.
+Este proyecto está desarrollado en **Kotlin** utilizando **Android Studio** para crear una aplicación móvil que permite a los usuarios gestionar una lista de novelas. A través de fragmentos y widgets, se ofrece una interfaz modular y adaptable para mostrar tanto la lista de novelas como los detalles de cada una. Además, un widget permite ver la lista resumida de novelas favoritas directamente desde la pantalla de inicio.
 
 ## ¿Cómo he estructurado el proyecto?
 
-- **MainActivity**: Es el corazón de la aplicación. Aquí se cargan y sincronizan los datos de novelas con Firestore, se maneja la recepción de notificaciones a través de Firebase Cloud Messaging y se controla la navegación entre las diferentes pantallas.
-  
-- **MyFirebaseMessagingService**: Este servicio gestiona la recepción de notificaciones push a través de FCM. Cuando llega una notificación, la aplicación genera y muestra un mensaje al usuario.
-  
-- **NetworkChangeReceiver**: Un `BroadcastReceiver` que detecta eventos de red, como la conexión a una red Wi-Fi. Cuando el dispositivo está conectado a Wi-Fi, la aplicación activa la sincronización de datos con Firestore automáticamente.
+### Fragmentos
+
+- **NovelListFragment**: Fragmento que muestra una lista de novelas mediante un `RecyclerView`. Este fragmento se encarga de observar cambios en la base de datos mediante `LiveData` y actualiza la lista en tiempo real.
+- **NovelDetailFragment**: Fragmento que muestra los detalles de una novela seleccionada, incluyendo el título, autor, año y sinopsis. La información se pasa a este fragmento mediante un `Bundle`.
+
+### Widgets
+
+- **NewAppWidget**: Widget de la aplicación que muestra un resumen de las novelas favoritas del usuario en la pantalla de inicio. Los usuarios pueden hacer clic en el widget para abrir la aplicación y ver más detalles.
+
+### AndroidManifest.xml
+
+- Configuración del widget y las actividades de la aplicación. Se declaran los fragmentos y el widget para asegurar su correcto funcionamiento en el ciclo de vida de la aplicación.
 
 ## Pantallas
 
-### MainActivity
+### NovelListFragment
 
-- **Descripción**: Pantalla principal de la aplicación que actúa como punto de entrada para la gestión de novelas.
+- **Descripción**: Muestra una lista de todas las novelas.
 - **Funcionalidades**:
-  - Sincronización de novelas desde Firebase Firestore.
-  - Sincronización automática cuando el dispositivo se conecta a Wi-Fi (usando `NetworkChangeReceiver`).
-  - Gestión de notificaciones push mediante Firebase Cloud Messaging.
-  - Navegación entre las pantallas de la aplicación.
+  - Carga de datos desde `Room` usando `LiveData` para actualizar dinámicamente la lista en el `RecyclerView`.
+  - Permite seleccionar una novela para mostrar sus detalles en `NovelDetailFragment`.
 
-### MyFirebaseMessagingService
+### NovelDetailFragment
 
-- **Descripción**: Servicio de Firebase Cloud Messaging para recibir notificaciones push.
+- **Descripción**: Pantalla de detalle de cada novela seleccionada.
 - **Funcionalidades**:
-  - Recibe mensajes push y genera notificaciones para el usuario.
-  - Verifica si el permiso de notificaciones está concedido antes de mostrar las alertas.
+  - Muestra información detallada de la novela (título, autor, año, sinopsis).
+  - Recibe datos a través de argumentos usando `Bundle`.
 
-### NetworkChangeReceiver
+### Widget de Novelas Favoritas
 
-- **Descripción**: Un `BroadcastReceiver` que detecta cambios en la conectividad del dispositivo.
+- **Descripción**: Widget de acceso rápido desde la pantalla de inicio.
 - **Funcionalidades**:
-  - Detecta cuando el dispositivo se conecta a una red Wi-Fi.
-  - Sincroniza los datos automáticamente con Firebase Firestore cuando hay conexión a Wi-Fi.
+  - Muestra un resumen de las novelas favoritas.
+  - Permite acceder rápidamente a la aplicación mediante un `PendingIntent` que abre la actividad principal.
 
-### WelcomeScreen
+## Arquitectura y Configuración del Proyecto
 
-- **Descripción**: Pantalla de bienvenida donde el usuario puede comenzar a navegar por la aplicación.
-- **Funcionalidades**:
-  - Botón para navegar a la `SecondScreen`.
+### Implementación de Fragmentos
 
-### SecondScreen
+Los fragmentos permiten una interfaz de usuario modular:
+- **NovelListFragment** observa cambios en la base de datos y actualiza la lista automáticamente.
+- **NovelDetailFragment** muestra los detalles de una novela seleccionada y se comunica con `NovelListFragment` para una navegación fluida.
 
-- **Descripción**: Pantalla de navegación hacia la pantalla de agregación de novelas y visualización de detalles.
-- **Funcionalidades**:
-  - Navegación hacia la pantalla de agregar novelas.
-  - Navegación hacia la pantalla de detalles de novelas.
+### Implementación de Widgets
 
-### AddNovelaScreen
+- **NewAppWidget** se configura para mostrar un resumen de las novelas favoritas y se actualiza periódicamente para reflejar los cambios en la lista de favoritos.
 
-- **Descripción**: Pantalla donde el usuario puede agregar una nueva novela a la colección de Firebase Firestore.
-- **Funcionalidades**:
-  - Permite introducir y guardar el título, año de publicación, nota media, editorial y temas de la novela.
-  - Sincronización automática de los datos con Firestore.
+### AndroidManifest.xml
 
-### DetallesNovelasScreen
+- El widget se registra en el manifiesto para que esté disponible en la pantalla de inicio. Se especifica el layout y el tamaño mínimo en `appwidget_provider_info.xml`.
 
-- **Descripción**: Pantalla que muestra la lista de novelas almacenadas en Firestore.
-- **Funcionalidades**:
-  - Listado de novelas.
-  - Posibilidad de marcar novelas como favoritas.
-  - Botones para eliminar novelas o ver las reseñas.
+## Flujo de la Aplicación
 
-### ResenasScreen
+1. El usuario abre la aplicación y ve la lista de novelas en `NovelListFragment`.
+2. Al seleccionar una novela, `NovelDetailFragment` muestra los detalles específicos de la novela seleccionada.
+3. El widget muestra un resumen de las novelas favoritas y permite al usuario acceder rápidamente a la aplicación.
+4. Los datos de las novelas se gestionan mediante `Room` y `LiveData`, permitiendo que las listas y detalles se actualicen en tiempo real.
 
-- **Descripción**: Pantalla donde el usuario puede ver las reseñas de una novela seleccionada y añadir nuevas reseñas.
-- **Funcionalidades**:
-  - Mostrar la lista de reseñas existentes.
-  - Añadir nuevas reseñas y sincronizarlas con Firestore.
 
 ## Corrección 🖇️
 
-**Link a codespace:** [codespace_de_Sonia](https://codespaces.new/SoniaTejeroRecio/gestionNovelas_SoniaTejeroRecio)
+**Repositorio de GitHub:** [Repositorio](https://github.com/SoniaTejeroRecio/novelaConFragments.git)
 
-**Repositorio de GitHub:** [Repositorio](https://github.com/SoniaTejeroRecio/gestionNovelas_SoniaTejeroRecio.git)

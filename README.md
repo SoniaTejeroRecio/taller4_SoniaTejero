@@ -1,4 +1,4 @@
-# Novelas con widgets y fragments - Sonia Tejero Recio
+# Taller4 - Sonia Tejero Recio
 
 ## Comenzamos 🚀
 
@@ -15,7 +15,7 @@ Este proyecto está desarrollado en **Kotlin** utilizando **Android Studio** par
 
 - **NewAppWidget**: Widget de la aplicación que muestra un resumen de las novelas favoritas del usuario en la pantalla de inicio. Los usuarios pueden hacer clic en el widget para abrir la aplicación y ver más detalles.
 
-### AndroidManifest.xml
+### `AndroidManifest.xml`
 
 - Configuración del widget y las actividades de la aplicación. Se declaran los fragmentos y el widget para asegurar su correcto funcionamiento en el ciclo de vida de la aplicación.
 
@@ -54,7 +54,7 @@ Los fragmentos permiten una interfaz de usuario modular:
 
 - **NewAppWidget** se configura para mostrar un resumen de las novelas favoritas y se actualiza periódicamente para reflejar los cambios en la lista de favoritos.
 
-### AndroidManifest.xml
+### `AndroidManifest.xml`
 
 - El widget se registra en el manifiesto para que esté disponible en la pantalla de inicio. Se especifica el layout y el tamaño mínimo en `appwidget_provider_info.xml`.
 
@@ -65,8 +65,40 @@ Los fragmentos permiten una interfaz de usuario modular:
 3. El widget muestra un resumen de las novelas favoritas y permite al usuario acceder rápidamente a la aplicación.
 4. Los datos de las novelas se gestionan mediante `Room` y `LiveData`, permitiendo que las listas y detalles se actualicen en tiempo real.
 
+## Objetivos específicos
+
+- Comprender y utilizar fragmentos para crear interfaces de usuario modulares y reutilizables.
+- Implementar widgets que permitan interactuar con la aplicación desde la pantalla de inicio.
+- Utilizar sensores para obtener información del entorno y mejorar la interactividad de la aplicación.
+- Diseñar aplicaciones que proporcionen una experiencia de usuario enriquecida y dinámica.
+
+## Enunciado
+
+Desarrolla una aplicación Android que incluya las siguientes funcionalidades para expandir la experiencia del usuario:
+
+### Pantalla de Inicio
+
+- Un saludo personalizado que cambia según la hora del día (Buenos días, Buenas tardes, Buenas noches).
+- Un botón que lleve a la pantalla de la actividad principal.
+
+### Actividad Principal
+
+- Uso de fragmentos para dividir la interfaz en secciones reutilizables.
+- Un fragmento que muestre una lista de elementos.
+- Un segundo fragmento que muestre los detalles del elemento seleccionado.
+- Implementación de la comunicación entre fragmentos.
+
+### Widget de Aplicación
+
+- Un widget que muestre información relevante de la aplicación (por ejemplo, un resumen de datos).
+- Un botón en el widget que actualice la información mostrada.
+
+### Uso de Sensores
+
+- Implementar el uso del acelerómetro para detectar movimientos del dispositivo.
+- Realizar una acción en la aplicación basada en la detección del movimiento (por ejemplo, cambiar el color de fondo).
 
 ## Corrección 🖇️
 
-**Repositorio de GitHub:** [Repositorio](https://github.com/SoniaTejeroRecio/novelaConFragments.git)
+**Repositorio de GitHub:** [Repositorio](https://github.com/SoniaTejeroRecio/taller4_SoniaTejero.git)
 
